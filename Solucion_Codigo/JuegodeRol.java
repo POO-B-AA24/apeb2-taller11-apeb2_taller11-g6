@@ -36,7 +36,6 @@ class SistemaCombate {
                 p2.atacar(p1);
             }
         }
-        
         if (p1.vida > 0) {
             p1.ganarBatalla();
         } else {
