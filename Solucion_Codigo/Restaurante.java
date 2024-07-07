@@ -1,7 +1,10 @@
 package restaurante;
+
 import java.util.ArrayList;
 import java.util.List;
+
 public class Restaurante {
+
     public static void main(String[] args) {
         Menu menuCarta = new MenuCarta("Arroz con Pollo", 7.00, 3.00, 1.00, 10);
         Menu menuDia = new MenuDia("Pollo con Ensalada", 6.00, 3.00, 1.50);
@@ -15,10 +18,11 @@ public class Restaurante {
         cuenta.calcularValores();
         System.out.println(cuenta);
     }
-    
+
 }
 
 abstract class Menu {
+
     protected String nombrePlato;
     protected double valorInicial;
     protected double valorMenu;
@@ -27,7 +31,9 @@ abstract class Menu {
         this.nombrePlato = nombrePlato;
         this.valorInicial = valorInicial;
     }
+
     public abstract void calcularValorMenu();
+
     @Override
     public String toString() {
         return String.format("Plato: %s - Valor del menú: %.2f", nombrePlato, valorMenu);
@@ -39,6 +45,7 @@ abstract class Menu {
 }
 
 class MenuCarta extends Menu {
+
     private double valorGuarnicion;
     private double valorBebida;
     private double porcentajeAdicional;
@@ -57,6 +64,7 @@ class MenuCarta extends Menu {
 }
 
 class MenuDia extends Menu {
+
     private double valorPostre;
     private double valorBebida;
 
@@ -73,6 +81,7 @@ class MenuDia extends Menu {
 }
 
 class MenuNinos extends Menu {
+
     private double valorHelado;
     private double valorPastel;
 
@@ -87,7 +96,9 @@ class MenuNinos extends Menu {
         valorMenu = valorInicial + valorHelado + valorPastel;
     }
 }
+
 class MenuEconomico extends Menu {
+
     private double porcentajeDescuento;
 
     public MenuEconomico(String nombrePlato, double valorInicial, double porcentajeDescuento) {
@@ -102,6 +113,7 @@ class MenuEconomico extends Menu {
 }
 
 class CuentaPorPagar {
+
     private String nombreCliente;
     private List<Menu> listadoMenus;
     private double subtotal;
@@ -129,15 +141,14 @@ class CuentaPorPagar {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(String.format("Cliente: %s\n", nombreCliente));
-        sb.append("Listado de Menús:\n");
+        String result = "Cliente: " + nombreCliente + "\n";
+        result += "Listado de Menús:\n";
         for (Menu menu : listadoMenus) {
-            sb.append(menu.toString()).append("\n");
+            result += menu.toString() + "\n";
         }
-        sb.append(String.format("Subtotal: %.2f\n", subtotal));
-        sb.append(String.format("IVA: %.2f\n", iva));
-        sb.append(String.format("Total a cancelar: %.2f\n", total));
-        return sb.toString();
+        result += String.format("Subtotal: %.2f\n", subtotal);
+        result += String.format("IVA: %.2f\n", iva);
+        result += String.format("Total a cancelar: %.2f\n", total);
+        return result;
     }
 }
